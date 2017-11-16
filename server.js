@@ -14,7 +14,7 @@ var app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-//app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile);
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'client')));
@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.get('/', function(req, res) {
 
     // ejs render automatically looks in the views folder
-    res.render('index');
+    res.render('index.html');
 });
 
 
