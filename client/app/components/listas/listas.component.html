@@ -1,0 +1,102 @@
+<div class="jumbotron text-center" (submit)="addLista($event)" >
+  <h1 class="display-3">Compare Prices Online</h1>
+  <p class="lead">¡Una aplicacion donde ahorrás en grande!</p>
+  <form>
+      <fieldset>
+        <legend>Crear Lista de Supermercado</legend>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Ingrese nombre para la lista</label>
+          <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" placeholder="Lista Palimpios">
+        </div>
+        <div>
+            <label>Seleccione un supermercado</label>
+            <br>
+            <input type="button" (click)="setWalmart()" value="Walmart" class="btn btn-primary">
+            <input type="button" (click)="setPali()" value="Pali" class="btn btn-primary">
+            <input type="button" (click)="setAmigazo()" value="El Amigazo" class="btn btn-primary">
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </fieldset>
+    </form>
+</div> 
+
+
+<form class="well">
+    <h1>Listas de compras disponibles: </h1>
+    <div class="lista-list">
+        <div *ngFor= "let lista of listas">
+            <div class="col-md-3">
+                {{lista.nombre}}    
+            </div> 
+            
+            <div class="col-md-3">
+                <input type="button" (click)="getProductos(lista.supermercado, lista)" value="InsertarProductos" class="btn btn-primary">
+            </div>
+
+            <div class="col-md-3">
+                <input type="button" (click)="getLista(lista._id)" value="VerProductos" class="btn btn-primary">
+            </div>
+
+            <div class="col-md-3">
+                <button type="button" (click)="deleteLista(lista._id)" value="Borrar" class="btn btn-danger"><img src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Close-24.png"></button>
+            </div>
+
+            <br><br>
+        </div>
+    </div>
+</form>
+
+<form class="well">
+    <h1>Productos en el supermercado: </h1>
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre</th>    
+          <th>Marca</th>
+          <th>Peso</th>
+          <th>Tipo</th>
+          <th>Precio</th>
+          <th>Agregar</th>
+        </tr>
+      </thead>
+      <tbody *ngFor= "let producto of productos">
+        <tr class="table-info">
+          <td>{{producto.nombre}} </td>
+          <td>{{producto.marca}}</td>
+          <td>{{producto.peso}}</td>
+          <td>{{producto.tipo}}</td>
+          <td>{{producto.precio}}</td>
+          <button type="button" (click)="setProducto(listaActual, producto)" class="btn btn-success"><img src="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/compose-24.png"></button>
+        </tr>
+      </tbody>
+    </table>
+</form>
+
+<form class="well">
+    <h1>Productos dentro de la lista: </h1>
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Cantidad</th>
+          <th>Nombre</th>
+          <th>Marca</th>
+          <th>Peso</th>
+          <th>Tipo</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+
+      <tbody *ngFor= "let producto of productosLista">
+        <tr>
+          <td>{{producto.cantidad}}</td>
+          <td>{{producto.nombre}} </td>
+          <td>{{producto.marca}}</td>
+          <td>{{producto.peso}}</td>
+          <td>{{producto.tipo}}</td>
+          <td>{{producto.precio}}</td>
+        </tr>
+      </tbody>
+    </table> 
+    <h2><strong>Costo Total: </strong></h2> <h3>{{this.total}}</h3>
+</form>
